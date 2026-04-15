@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nomit Dashboard - Life Management System</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <header class="header">
+            <div class="header-content">
+                <div class="logo">
+                    <i class="fas fa-hat-cowboy"></i>
+                    <h1>Nomit Dashboard</h1>
+                    <span class="subtitle">Life Management System</span>
+                </div>
+                <div class="header-stats">
+                    <div class="week-info">
+                        <i class="fas fa-calendar-week"></i>
+                        <span>KW 15 • 14.-20. Apr</span>
+                    </div>
+                    <div class="last-updated" id="lastUpdated">
+                        Live Dashboard
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Weekly Priority -->
+        <section class="card priority-card">
+            <div class="card-header">
+                <h2><i class="fas fa-bullseye"></i> Wochenpriorität</h2>
+                <div class="week-progress">
+                    <span class="progress-text">Woche 70%</span>
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 70%"></div>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="goals-list">
+                    <div class="goal-item">
+                        <div class="goal-header">
+                            <div class="goal-title">
+                                <div class="goal-icon" style="background: #e0e7ff; color: #4f46e5;">
+                                    <i class="fas fa-rocket"></i>
+                                </div>
+                                <div>
+                                    <h3>Nomit System live bringen</h3>
+                                    <span class="goal-area">Persönlich • 70%</span>
+                                </div>
+                            </div>
+                            <div class="goal-progress">
+                                <div class="progress-bar small">
+                                    <div class="progress-fill" style="width: 70%"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="goal-tasks">
+                            <div class="task-check">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Dashboard mit Wochenpriorität bauen</span>
+                            </div>
+                            <div class="task-check">
+                                <i class="fas fa-check-circle"></i>
+                                <span>Telegram Bot aktivieren</span>
+                            </div>
+                            <div class="task-check pending">
+                                <i class="far fa-circle"></i>
+                                <span>Daily-Checks einrichten</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="goal-item">
+                        <div class="goal-header">
+                            <div class="goal-title">
+                                <div class="goal-icon" style="background: #fef3c7; color: #d97706;">
+                                    <i class="fas fa-briefcase"></i>
+                                </div>
+                                <div>
+                                    <h3>Kundenprojekt abschließen</h3>
+                                    <span class="goal-area">Job • 40%</span>
+                                </div>
+                            </div>
+                            <div class="goal-progress">
+                                <div class="progress-bar small">
+                                    <div class="progress-fill" style="width: 40%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Life Areas -->
+        <section class="card areas-card">
+            <div class="card-header">
+                <h2><i class="fas fa-chart-pie"></i> Lebensbereiche</h2>
+                <div class="areas-quick">
+                    <span class="quick-stat">4 Bereiche • Q2 Ziele aktiv</span>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="areas-grid">
+                    <div class="area-card">
+                        <div class="area-header">
+                            <div class="area-icon" style="background: #dbeafe;">
+                                <i class="fas fa-briefcase"></i>
+                            </div>
+                            <h3>Job & Karriere</h3>
+                        </div>
+                        <div class="area-content">
+                            <p class="area-focus">Webentwicklung, Kundenprojekte</p>
+                            <div class="area-target">
+                                <i class="fas fa-flag"></i>
+                                <span>Skills für Remote Work Australien</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="area-card">
+                        <div class="area-header">
+                            <div class="area-icon" style="background: #dcfce7;">
+                                <i class="fas fa-heartbeat"></i>
+                            </div>
+                            <h3>Gesundheit & Fitness</h3>
+                        </div>
+                        <div class="area-content">
+                            <p class="area-focus">Supplements, Daily Routine</p>
+                            <div class="area-target">
+                                <i class="fas fa-flag"></i>
+                                <span>30 Tage Habits Konsistenz</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="area-card">
+                        <div class="area-header">
+                            <div class="area-icon" style="background: #f3e8ff;">
+                                <i class="fas fa-wallet"></i>
+                            </div>
+                            <h3>Finanzen</h3>
+                        </div>
+                        <div class="area-content">
+                            <p class="area-focus">Tagesbudget €40, Tracking</p>
+                            <div class="area-target">
+                                <i class="fas fa-flag"></i>
+                                <span>Australien-Sparplan starten</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="area-card">
+                        <div class="area-header">
+                            <div class="area-icon" style="background: #fef3c7;">
+                                <i class="fas fa-brain"></i>
+                            </div>
+                            <h3>Persönliche Entwicklung</h3>
+                        </div>
+                        <div class="area-content">
+                            <p class="area-focus">Australien-Vorbereitung, Skills</p>
+                            <div class="area-target">
+                                <i class="fas fa-flag"></i>
+                                <span>Englisch + Visum vorbereitet</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Today's Focus -->
+        <div class="columns">
+            <!-- Habits Column -->
+            <div class="column">
+                <section class="card habits-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-sync-alt"></i> Heutige Habits</h2>
+                        <div class="progress-indicator">
+                            <span class="progress-text" id="habitsProgressText">0/2</span>
+                            <div class="progress-bar">
+                                <div class="progress-fill" id="habitsProgressFill"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="habits-list" id="habitsList">
+                            <!-- Loaded by JavaScript -->
+                        </div>
+                        <div class="quick-actions">
+                            <button class="action-btn small" onclick="completeHabit('habit_morning_supp')">
+                                <i class="fas fa-sun"></i> Morgens
+                            </button>
+                            <button class="action-btn small" onclick="completeHabit('habit_evening_supp')">
+                                <i class="fas fa-moon"></i> Abends
+                            </button>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Australia -->
+                <section class="card australia-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-flag"></i> Australien 2027</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="countdown-display">
+                            <div class="countdown-number" id="daysToAustralia">261</div>
+                            <div class="countdown-label">Tage bis Start</div>
+                        </div>
+                        <div class="australia-progress">
+                            <div class="progress-step completed">
+                                <i class="fas fa-check"></i>
+                                <span>Impfungen planen</span>
+                            </div>
+                            <div class="progress-step current">
+                                <i class="fas fa-play"></i>
+                                <span>Visum recherchieren</span>
+                            </div>
+                            <div class="progress-step">
+                                <i class="far fa-circle"></i>
+                                <span>Job-Suche</span>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Tasks & Budget Column -->
+            <div class="column">
+                <!-- Tasks -->
+                <section class="card tasks-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-tasks"></i> Heutiger Fokus</h2>
+                        <button class="add-btn" onclick="addTask()">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="tasks-list">
+                            <div class="task-item priority-p1">
+                                <div class="task-checkbox">
+                                    <input type="checkbox" id="task1" onchange="toggleTask('task1')">
+                                </div>
+                                <div class="task-content">
+                                    <div class="task-title">Nomit System komplettieren</div>
+                                    <div class="task-meta">
+                                        <span class="task-priority">P1</span>
+                                        <span class="task-area">Persönlich</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="task-item priority-p2">
+                                <div class="task-checkbox">
+                                    <input type="checkbox" id="task2" onchange="toggleTask('task2')">
+                                </div>
+                                <div class="task-content">
+                                    <div class="task-title">Kundenprojekt Code Review</div>
+                                    <div class="task-meta">
+                                        <span class="task-priority">P2</span>
+                                        <span class="task-area">Job</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="task-item priority-p3">
+                                <div class="task-checkbox">
+                                    <input type="checkbox" id="task3" onchange="toggleTask('task3')">
+                                </div>
+                                <div class="task-content">
+                                    <div class="task-title">Englisch 15 min lernen</div>
+                                    <div class="task-meta">
+                                        <span class="task-priority">P3</span>
+                                        <span class="task-area">Australien</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Budget -->
+                <section class="card budget-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-wallet"></i> Tagesbudget</h2>
+                        <div class="budget-amount">
+                            <span class="budget-available">€<span id="budgetAvailable">31.50</span></span>
+                            <span class="budget-total">/ €40</span>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="budget-progress">
+                            <div class="progress-bar budget-bar">
+                                <div class="progress-fill" id="budgetProgressFill" style="width: 21%"></div>
+                            </div>
+                            <div class="budget-stats">
+                                <div class="budget-stat">
+                                    <span class="stat-label">Ausgegeben:</span>
+                                    <span class="stat-value">€<span id="budgetSpent">8.50</span></span>
+                                </div>
+                                <div class="budget-stat">
+                                    <span class="stat-label">Verbleibend:</span>
+                                    <span class="stat-value">€<span id="budgetRemaining">31.50</span></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="expenses-list">
+                            <div class="expense-item">
+                                <div class="expense-icon">
+                                    <i class="fas fa-utensils"></i>
+                                </div>
+                                <div class="expense-details">
+                                    <div class="expense-desc">Mittagessen</div>
+                                    <div class="expense-category">Essen</div>
+                                </div>
+                                <div class="expense-amount">€8.50</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Journal & Telegram -->
+        <div class="columns">
+            <!-- Journal -->
+            <div class="column">
+                <section class="card journal-card">
+                    <div class="card-header">
+                        <h2><i class="fas fa-book"></i> Heutiges Journal</h2>
+                        <div class="journal-date" id="currentDate"></div>
+                    </div>
+                    <div class="card-body">
+                        <div class="journal-section">
+                            <h3><i class="fas fa-sun"></i> Morgen-Checkin</h3>
+                            <p class="journal-text">Energie: 7/10 • Fokus: Nomit System fertigstellen, Kundenprojekt</p>
+                            <div class="gratitude-list">
+                                <div class="gratitude-item">
+                                    <i class="fas fa-heart"></i>
+                                    <span>Gesundheit nach Krankheit</span>
+                                </div>
+                                <div class="gratitude-item">
+                                    <i class="fas fa-heart"></i>
+                                    <span>Motivation für System-Bau</span>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="action-btn full-width" onclick="openJournal()">
+                            <i class="fas fa-pen"></i> Journal öffnen
+                        </button>
+                    </div>
+                </section>
+            </div>
+
+            <!-- Telegram & Help -->
+            <div class="column">
+                <section class="card telegram-card">
+                    <div class="card-header">
+                        <h2><i class="fab fa-telegram"></i> Telegram Commands</h2>
+                    </div>
+                    <div class="card-body">
+                        <div class="commands-list">
+                            <div class="command-item">
+                                <div class="command-icon">
+                                    <i class="fas fa-pills"></i>
+                                </div>
+                                <div class="command-text">
+                                    <code>"Supplements morgens genommen"</code>
+                                    <span class="command-desc">→ Track Habit</span>
+                                </div>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-icon">
+                                    <i class="fas fa-tasks"></i>
+                                </div>
+                                <div class="command-text">
+                                    <code>"Aufgabe erledigt"</code>
+                                    <span class="command-desc">→ Mark task complete</span>
+                                </div>
+                            </div>
+                            <div class="command-item">
+                                <div class="command-icon">
+                                    <i class="fas fa-euro-sign"></i>
+                                </div>
+                                <div class="command-text">
+                                    <code>"30€ für Essen"</code>
+                                    <span class="command-desc">→ Track expense</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="telegram-actions">
+                            <button class="action-btn telegram-btn" onclick="sendTestCommand()">
+                                <i class="fab fa-telegram"></i> Test Command
+                            </button>
+                            <button class="action-btn" onclick="showHelp()">
+                                <i class="fas fa-question-circle"></i> Hilfe
+                            </button>
+                        </div>
+                    </div>
+                </section>
+            </div>
+        </div>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>Nomit Life Management System • Fokus Framework inspiriert • Entwickelt für Timon • 🎩</p>
+            <p class="version">v2.0 • Dashboard live • <span id="currentTime"></span></p>
+        </footer>
+    </div>
+
+    <!-- Toast Notification -->
+    <div id="toast" class="toast"></div>
+
+    <!-- JavaScript -->
+    <script src="/static/js/app.js?v=2.0"></script>
+    <script>
+        // Force cache refresh
+        if (performance.navigation.type === 1) {
+            // Page was reloaded
+            console.log('Nomit Dashboard v2.0 loaded');
+        }
+        
+        // Show version in console
+        console.log('🎩 Nomit Dashboard v2.0 - Life Management System');
+        console.log('📅 ' + new Date().toLocaleString('de-DE'));
+    </script>
+</body>
+</html>
