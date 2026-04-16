@@ -3,8 +3,29 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomit Design Test - Lila/Grau Glassmorphism</title>
+    <title>Nomit Design - Dribbble Style</title>
     <style>
+        /* Dribbble Style - Clean, Professional, Dark Blue */
+        :root {
+            /* Color Palette */
+            --bg-primary: #0f172a;
+            --bg-card: #1e293b;
+            --bg-card-hover: #252f41;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+            --primary: #3b82f6;
+            --primary-hover: #2563eb;
+            --secondary: #8b5cf6;
+            --accent: #10b981;
+            --success: #10b981;
+            --warning: #f59e0b;
+            --danger: #ef4444;
+            --border: #334155;
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
+            --radius: 8px;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -13,364 +34,511 @@
         }
 
         body {
-            background-color: #483248;
-            color: #f8fafc;
+            background-color: var(--bg-primary);
+            color: var(--text-primary);
             min-height: 100vh;
             padding: 2rem;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
         }
 
         .container {
-            max-width: 1200px;
-            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        h1 {
-            font-size: 2.5rem;
-            margin-bottom: 0.5rem;
-            color: #f8fafc;
-            text-align: center;
+        /* Header */
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
         }
 
-        .subtitle {
-            color: #cbd5e1;
-            text-align: center;
-            margin-bottom: 3rem;
-            font-size: 1.1rem;
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-size: 1.5rem;
+            font-weight: 700;
         }
 
-        .grid {
+        .logo-icon {
+            color: var(--primary);
+            font-size: 1.8rem;
+        }
+
+        .date-display {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        /* Stats Bar */
+        .stats-bar {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.25rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--primary);
+        }
+
+        .stat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.75rem;
+        }
+
+        .stat-title {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .stat-icon {
+            width: 36px;
+            height: 36px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .icon-blue { background: rgba(59, 130, 246, 0.15); color: var(--primary); }
+        .icon-purple { background: rgba(139, 92, 246, 0.15); color: var(--secondary); }
+        .icon-green { background: rgba(16, 185, 129, 0.15); color: var(--accent); }
+        .icon-orange { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-trend {
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
+            font-size: 0.875rem;
+            font-weight: 600;
+        }
+
+        .trend-up { color: var(--success); }
+        .trend-down { color: var(--danger); }
+
+        /* Main Grid */
+        .main-grid {
+            display: grid;
+            grid-template-columns: 2fr 1fr;
             gap: 1.5rem;
             margin-bottom: 2rem;
         }
 
-        /* Glass Card Base */
-        .glass-card {
-            background: rgba(255, 255, 255, 0.08);
-            backdrop-filter: blur(8px);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 16px;
-            padding: 1.5rem;
-            transition: transform 0.2s, box-shadow 0.2s;
+        @media (max-width: 1024px) {
+            .main-grid {
+                grid-template-columns: 1fr;
+            }
         }
 
-        .glass-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
+        /* Card Base */
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow);
+        }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
         }
 
         .card-title {
             font-size: 1.25rem;
-            margin-bottom: 1rem;
-            color: #f8fafc;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .card-title .icon {
-            color: #c4b5fd;
-        }
-
-        /* Color Palette Display */
-        .color-palette {
-            display: flex;
-            gap: 0.5rem;
-            margin: 1rem 0;
-        }
-
-        .color-box {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.7rem;
-            font-weight: bold;
-            color: white;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.3);
-        }
-
-        .bg-primary { background: #483248; }
-        .bg-glass { background: rgba(255, 255, 255, 0.08); }
-        .bg-text-primary { background: #f8fafc; color: #483248; }
-        .bg-text-secondary { background: #cbd5e1; color: #483248; }
-        .bg-accent { background: #c4b5fd; }
-
-        /* UI Elements */
-        .button {
-            background: rgba(196, 181, 253, 0.2);
-            border: 1px solid rgba(196, 181, 253, 0.3);
-            color: #c4b5fd;
-            padding: 0.75rem 1.5rem;
-            border-radius: 10px;
             font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            margin: 0.5rem 0;
         }
 
-        .button:hover {
-            background: rgba(196, 181, 253, 0.3);
-            border-color: rgba(196, 181, 253, 0.5);
+        .card-subtitle {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
         }
 
-        .button-primary {
-            background: #c4b5fd;
-            color: #483248;
-            border: none;
+        /* Progress Section */
+        .progress-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1rem;
+            margin-top: 1rem;
         }
 
-        .button-primary:hover {
-            background: #a78bfa;
+        .progress-item {
+            padding: 1rem;
+            background: var(--bg-card-hover);
+            border-radius: var(--radius);
+            border-left: 4px solid var(--primary);
         }
 
-        /* Progress Bar */
-        .progress-container {
-            margin: 1rem 0;
-        }
+        .progress-item:nth-child(2) { border-left-color: var(--secondary); }
+        .progress-item:nth-child(3) { border-left-color: var(--accent); }
+        .progress-item:nth-child(4) { border-left-color: var(--warning); }
 
-        .progress-label {
+        .progress-header {
             display: flex;
             justify-content: space-between;
             margin-bottom: 0.5rem;
-            color: #cbd5e1;
+        }
+
+        .progress-name {
+            font-weight: 600;
+        }
+
+        .progress-percent {
+            color: var(--text-secondary);
+            font-weight: 700;
         }
 
         .progress-bar {
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
+            height: 6px;
+            background: var(--border);
+            border-radius: 3px;
             overflow: hidden;
+            margin-top: 0.5rem;
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, #c4b5fd, #a78bfa);
-            border-radius: 4px;
-            transition: width 0.3s ease;
+            border-radius: 3px;
         }
 
-        /* Status Colors */
-        .status-success { color: #10b981; }
-        .status-warning { color: #f59e0b; }
-        .status-danger { color: #ef4444; }
-        .status-info { color: #3b82f6; }
+        .fill-blue { background: var(--primary); }
+        .fill-purple { background: var(--secondary); }
+        .fill-green { background: var(--accent); }
+        .fill-orange { background: var(--warning); }
 
-        /* Sample Content */
+        /* Habits List */
+        .habits-list {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
         .habit-item {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            padding: 0.75rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 10px;
-            margin: 0.5rem 0;
+            padding: 1rem;
+            background: var(--bg-card-hover);
+            border-radius: var(--radius);
+            border: 1px solid transparent;
+            transition: border-color 0.2s;
         }
 
-        .habit-name {
+        .habit-item:hover {
+            border-color: var(--primary);
+        }
+
+        .habit-info {
             display: flex;
             align-items: center;
             gap: 0.75rem;
         }
 
-        .checkbox {
+        .habit-checkbox {
             width: 20px;
             height: 20px;
-            border: 2px solid rgba(255, 255, 255, 0.3);
-            border-radius: 6px;
+            border: 2px solid var(--border);
+            border-radius: 4px;
             cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        .checkbox.checked {
-            background: #c4b5fd;
-            border-color: #c4b5fd;
+        .habit-checkbox.checked {
+            background: var(--primary);
+            border-color: var(--primary);
         }
 
-        .streak {
-            background: rgba(196, 181, 253, 0.2);
-            color: #c4b5fd;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
+        .habit-checkbox.checked::after {
+            content: "✓";
+            color: white;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        .habit-name {
+            font-weight: 500;
+        }
+
+        .habit-category {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+            background: var(--border);
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+        }
+
+        .habit-streak {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.875rem;
             font-weight: 600;
+        }
+
+        .streak-fire {
+            color: var(--warning);
+        }
+
+        /* Color Palette Display */
+        .color-palette {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1.5rem 0;
+            padding: 1rem;
+            background: var(--bg-card-hover);
+            border-radius: var(--radius);
+        }
+
+        .color-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.25rem;
+        }
+
+        .color-box {
+            width: 40px;
+            height: 40px;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+        }
+
+        .color-label {
+            font-size: 0.7rem;
+            color: var(--text-secondary);
         }
 
         /* Footer */
         .footer {
             text-align: center;
             margin-top: 3rem;
-            color: #9ca3af;
-            font-size: 0.9rem;
+            padding-top: 1.5rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
+            font-size: 0.875rem;
         }
 
         .accent {
-            color: #c4b5fd;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.5rem 1rem;
+            border-radius: var(--radius);
+            border: none;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.875rem;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn-outline {
+            background: transparent;
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+        }
+
+        .btn-outline:hover {
+            border-color: var(--primary);
+            color: var(--primary);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🎩 Nomit Design Test</h1>
-        <p class="subtitle">Lila/Grau Glassmorphism - Farbpalette & UI Elements</p>
-
-        <div class="grid">
-            <!-- Color Palette Card -->
-            <div class="glass-card">
-                <h2 class="card-title"><span class="icon">🎨</span> Farbpalette</h2>
-                <p>Primäre Farben für das Nomit Dashboard</p>
-                
-                <div class="color-palette">
-                    <div class="color-box bg-primary" title="Hintergrund">#483248</div>
-                    <div class="color-box bg-glass" title="Glass Card">Glass</div>
-                    <div class="color-box bg-text-primary" title="Primärtext">#f8fafc</div>
-                    <div class="color-box bg-text-secondary" title="Sekundärtext">#cbd5e1</div>
-                    <div class="color-box bg-accent" title="Akzent">#c4b5fd</div>
-                </div>
-
-                <p><strong>Hintergrund:</strong> Dunkles Lila/Grau (#483248)</p>
-                <p><strong>Glass Cards:</strong> rgba(255,255,255,0.08) mit blur(8px)</p>
-                <p><strong>Text:</strong> Warmes Weiß (#f8fafc) & Grau (#cbd5e1)</p>
-                <p><strong>Akzent:</strong> Pastell Lila (#c4b5fd)</p>
+        <!-- Header -->
+        <div class="header">
+            <div class="logo">
+                <span class="logo-icon">🎩</span>
+                <span>Nomit Life Manager</span>
             </div>
+            <div class="date-display">Mittwoch, 16. April 2026</div>
+        </div>
 
-            <!-- UI Elements Card -->
-            <div class="glass-card">
-                <h2 class="card-title"><span class="icon">⚡</span> UI Elements</h2>
-                
-                <div class="button">Standard Button</div>
-                <div class="button button-primary">Primary Button</div>
-                
-                <div class="progress-container">
-                    <div class="progress-label">
-                        <span>Wochenfortschritt</span>
-                        <span>62%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 62%"></div>
-                    </div>
+        <!-- Stats Bar -->
+        <div class="stats-bar">
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-title">Habits Today</div>
+                    <div class="stat-icon icon-blue">🔄</div>
                 </div>
-
-                <div class="progress-container">
-                    <div class="progress-label">
-                        <span>Australien Countdown</span>
-                        <span>261 Tage</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 28%"></div>
-                    </div>
-                </div>
-
-                <p><span class="status-success">● Erfolg:</span> Habit completed</p>
-                <p><span class="status-warning">● Warnung:</span> Budget almost exceeded</p>
-                <p><span class="status-danger">● Fehler:</span> Task overdue</p>
-                <p><span class="status-info">● Info:</span> New notification</p>
-            </div>
-
-            <!-- Sample Content Card -->
-            <div class="glass-card">
-                <h2 class="card-title"><span class="icon">🔄</span> Habit Tracker</h2>
-                
-                <div class="habit-item">
-                    <div class="habit-name">
-                        <div class="checkbox checked"></div>
-                        <span>Supplements morgens nehmen</span>
-                    </div>
-                    <div class="streak">7 Tage</div>
-                </div>
-
-                <div class="habit-item">
-                    <div class="habit-name">
-                        <div class="checkbox"></div>
-                        <span>Supplements abends nehmen</span>
-                    </div>
-                    <div class="streak">3 Tage</div>
-                </div>
-
-                <div class="habit-item">
-                    <div class="habit-name">
-                        <div class="checkbox checked"></div>
-                        <span>30min Englisch lernen</span>
-                    </div>
-                    <div class="streak">14 Tage</div>
-                </div>
-
-                <div class="habit-item">
-                    <div class="habit-name">
-                        <div class="checkbox"></div>
-                        <span>Budget tracken</span>
-                    </div>
-                    <div class="streak">0 Tage</div>
+                <div class="stat-value">3/4</div>
+                <div class="stat-trend trend-up">
+                    <span>↑</span>
+                    <span>75% Completion</span>
                 </div>
             </div>
 
-            <!-- PARA System Preview -->
-            <div class="glass-card">
-                <h2 class="card-title"><span class="icon">🧠</span> PARA System</h2>
-                <p>Projects • Areas • Resources • Archive</p>
-                
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1rem;">
-                    <div style="background: rgba(196, 181, 253, 0.1); padding: 1rem; border-radius: 10px;">
-                        <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: #c4b5fd;">Projects</h3>
-                        <ul style="color: #cbd5e1; font-size: 0.9rem; padding-left: 1rem;">
-                            <li>Nomit Dashboard</li>
-                            <li>Australia Prep</li>
-                            <li>Web Dev Course</li>
-                        </ul>
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-title">Weekly Progress</div>
+                    <div class="stat-icon icon-purple">📈</div>
+                </div>
+                <div class="stat-value">62%</div>
+                <div class="stat-trend trend-up">
+                    <span>↑</span>
+                    <span>+8% from last week</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-title">Budget Today</div>
+                    <div class="stat-icon icon-green">💰</div>
+                </div>
+                <div class="stat-value">€24/€40</div>
+                <div class="stat-trend trend-down">
+                    <span>↓</span>
+                    <span>€16 remaining</span>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-header">
+                    <div class="stat-title">Australia Countdown</div>
+                    <div class="stat-icon icon-orange">🌴</div>
+                </div>
+                <div class="stat-value">261</div>
+                <div class="stat-trend">
+                    <span>Days</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-grid">
+            <!-- Left Column -->
+            <div>
+                <!-- Progress Card -->
+                <div class="card">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Life Areas Progress</div>
+                            <div class="card-subtitle">Weekly overview across 4 key areas</div>
+                        </div>
+                        <button class="btn btn-outline">View Details</button>
                     </div>
                     
-                    <div style="background: rgba(196, 181, 253, 0.1); padding: 1rem; border-radius: 10px;">
-                        <h3 style="font-size: 1rem; margin-bottom: 0.5rem; color: #c4b5fd;">Areas</h3>
-                        <ul style="color: #cbd5e1; font-size: 0.9rem; padding-left: 1rem;">
-                            <li>Job & Karriere</li>
-                            <li>Gesundheit</li>
-                            <li>Finanzen</li>
-                            <li>Persönlich</li>
-                        </ul>
+                    <div class="progress-grid">
+                        <div class="progress-item">
+                            <div class="progress-header">
+                                <div class="progress-name">Job & Karriere</div>
+                                <div class="progress-percent">80%</div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill fill-blue" style="width: 80%"></div>
+                            </div>
+                        </div>
+
+                        <div class="progress-item">
+                            <div class="progress-header">
+                                <div class="progress-name">Gesundheit & Fitness</div>
+                                <div class="progress-percent">65%</div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill fill-purple" style="width: 65%"></div>
+                            </div>
+                        </div>
+
+                        <div class="progress-item">
+                            <div class="progress-header">
+                                <div class="progress-name">Finanzen</div>
+                                <div class="progress-percent">45%</div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill fill-green" style="width: 45%"></div>
+                            </div>
+                        </div>
+
+                        <div class="progress-item">
+                            <div class="progress-header">
+                                <div class="progress-name">Persönliche Entwicklung</div>
+                                <div class="progress-percent">90%</div>
+                            </div>
+                            <div class="progress-bar">
+                                <div class="progress-fill fill-orange" style="width: 90%"></div>
+                            </div>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="footer">
-            <p>🎩 <span class="accent">Nomit Life Manager</span> - Design Test | Glassmorphism mit Lila/Grau Palette</p>
-            <p style="margin-top: 0.5rem; font-size: 0.8rem;">Hintergrund: #483248 | Text: #f8fafc | Akzent: #c4b5fd</p>
-        </div>
-    </div>
+                <!-- Habits Card -->
+                <div class="card" style="margin-top: 1.5rem;">
+                    <div class="card-header">
+                        <div>
+                            <div class="card-title">Today's Habits</div>
+                            <div class="card-subtitle">Click to mark as completed</div>
+                        </div>
+                        <button class="btn btn-primary">Add New</button>
+                    </div>
+                    
+                    <div class="habits-list">
+                        <div class="habit-item">
+                            <div class="habit-info">
+                                <div class="habit-checkbox checked"></div>
+                                <div>
+                                    <div class="habit-name">Supplements morgens nehmen</div>
+                                    <div class="habit-category">Gesundheit</div>
+                                </div>
+                            </div>
+                            <div class="habit-streak">
+                                <span class="streak-fire">🔥</span>
+                                <span>7 day streak</span>
+                            </div>
+                        </div>
 
-    <script>
-        // Interactive checkboxes
-        document.querySelectorAll('.checkbox').forEach(checkbox => {
-            checkbox.addEventListener('click', function() {
-                this.classList.toggle('checked');
-                
-                // Update streak text (simulated)
-                const streak = this.closest('.habit-item').querySelector('.streak');
-                if (this.classList.contains('checked')) {
-                    const current = parseInt(streak.textContent);
-                    streak.textContent = (current + 1) + ' Tage';
-                }
-            });
-        });
-
-        // Button interactions
-        document.querySelectorAll('.button').forEach(button => {
-            button.addEventListener('click', function() {
-                this.style.transform = 'scale(0.98)';
-                setTimeout(() => {
-                    this.style.transform = '';
-                }, 150);
-            });
-        });
-    </script>
-</body>
-</html>
+                        <div class="habit-item">
+                            <div class="habit-info">
+                                <div class="habit-checkbox"></div>
+                                <div>
+                                    <div class="habit-name">Supplements abends nehmen</div>
+                                    <div class="habit-category">Gesundheit</div>
+                                </div>
+                            </div>
+                            <div class="habit-streak">
+                                <span class="streak-fire">
