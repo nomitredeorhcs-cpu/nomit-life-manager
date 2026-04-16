@@ -3,343 +3,264 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomit Design - Dribbble Style</title>
+    <title>Nomit - Code Syntax Dark Mode</title>
     <style>
-        /* Dribbble Style - Clean, Professional, Dark Blue */
+        /* Code Editor Dark Theme */
         :root {
-            /* Color Palette */
-            --bg-primary: #0f172a;
-            --bg-card: #1e293b;
-            --bg-card-hover: #252f41;
-            --text-primary: #f8fafc;
-            --text-secondary: #94a3b8;
-            --text-muted: #64748b;
-            --primary: #3b82f6;
-            --primary-hover: #2563eb;
-            --secondary: #8b5cf6;
-            --accent: #10b981;
-            --success: #10b981;
-            --warning: #f59e0b;
-            --danger: #ef4444;
-            --border: #334155;
-            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3), 0 2px 4px -1px rgba(0, 0, 0, 0.2);
-            --radius: 8px;
+            /* GitHub Dark Theme inspired */
+            --bg-primary: #0d1117;
+            --bg-secondary: #161b22;
+            --bg-tertiary: #21262d;
+            --bg-card: #1c2128;
+            --border: #30363d;
+            --border-light: #3c444d;
+            
+            /* Syntax Highlighting Colors */
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --text-muted: #6e7681;
+            
+            --keyword: #ff7b72;      /* Red-Orange for keywords */
+            --string: #a5d6ff;       /* Light Blue for strings */
+            --function: #d2a8ff;     /* Purple for functions */
+            --variable: #79c0ff;     /* Blue for variables */
+            --constant: #56d364;     /* Green for constants */
+            --comment: #8b949e;      /* Gray for comments */
+            --type: #ffa657;         /* Orange for types */
+            
+            /* UI Colors */
+            --accent: #58a6ff;       /* GitHub Blue */
+            --success: #3fb950;      /* Green */
+            --warning: #d29922;      /* Yellow */
+            --danger: #f85149;       /* Red */
+            
+            /* Code Specific */
+            --line-number: #6e7681;
+            --selection: #264f78;
+            
+            --radius: 6px;
+            --shadow: 0 8px 24px rgba(1, 4, 9, 0.8);
+            --font-mono: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', 'Courier New', monospace;
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
         }
 
         body {
             background-color: var(--bg-primary);
             color: var(--text-primary);
+            font-family: var(--font-mono);
+            font-size: 14px;
+            line-height: 1.6;
             min-height: 100vh;
             padding: 2rem;
         }
 
         .container {
-            max-width: 1400px;
+            max-width: 1200px;
             margin: 0 auto;
         }
 
-        /* Header */
+        /* Header - File Tab Style */
         .header {
             display: flex;
-            justify-content: space-between;
             align-items: center;
             margin-bottom: 2rem;
-            padding-bottom: 1rem;
             border-bottom: 1px solid var(--border);
+            padding-bottom: 1rem;
         }
 
-        .logo {
+        .file-tabs {
             display: flex;
-            align-items: center;
-            gap: 0.75rem;
-            font-size: 1.5rem;
-            font-weight: 700;
+            gap: 0.25rem;
         }
 
-        .logo-icon {
-            color: var(--primary);
-            font-size: 1.8rem;
-        }
-
-        .date-display {
+        .file-tab {
+            padding: 0.5rem 1rem;
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            border-bottom: none;
+            border-radius: var(--radius) var(--radius) 0 0;
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            cursor: pointer;
+            font-family: var(--font-mono);
+            font-size: 12px;
         }
 
-        /* Stats Bar */
-        .stats-bar {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1rem;
-            margin-bottom: 2rem;
+        .file-tab.active {
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            border-color: var(--border-light);
+            border-bottom: 1px solid var(--bg-primary);
+            margin-bottom: -1px;
         }
 
-        .stat-card {
+        .file-tab .icon {
+            margin-right: 0.5rem;
+            font-size: 12px;
+        }
+
+        /* Code Container */
+        .code-container {
             background: var(--bg-card);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 1.25rem;
             box-shadow: var(--shadow);
-            transition: transform 0.2s, border-color 0.2s;
+            margin-bottom: 2rem;
+            overflow: hidden;
         }
 
-        .stat-card:hover {
-            transform: translateY(-2px);
-            border-color: var(--primary);
-        }
-
-        .stat-header {
+        .code-header {
+            background: var(--bg-secondary);
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 0.75rem;
+            font-size: 12px;
+            color: var(--text-secondary);
         }
 
-        .stat-title {
+        .code-title {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .code-title .icon {
+            color: var(--accent);
+        }
+
+        .code-body {
+            padding: 1.5rem;
+            position: relative;
+        }
+
+        /* Line Numbers */
+        .line-numbers {
+            position: absolute;
+            left: 0;
+            top: 1.5rem;
+            padding: 0 1rem;
+            color: var(--line-number);
+            text-align: right;
+            user-select: none;
+            font-size: 13px;
+        }
+
+        .line-number {
+            height: 1.6em;
+            display: block;
+        }
+
+        .code-content {
+            margin-left: 3rem;
+            font-family: var(--font-mono);
+            font-size: 13px;
+        }
+
+        /* Syntax Highlighting */
+        .line {
+            display: flex;
+            align-items: flex-start;
+            min-height: 1.6em;
+            padding-left: 1rem;
+        }
+
+        .indent-1 { padding-left: 2rem; }
+        .indent-2 { padding-left: 4rem; }
+        .indent-3 { padding-left: 6rem; }
+
+        .keyword { color: var(--keyword); }
+        .string { color: var(--string); }
+        .function { color: var(--function); }
+        .variable { color: var(--variable); }
+        .constant { color: var(--constant); }
+        .comment { color: var(--comment); font-style: italic; }
+        .type { color: var(--type); }
+        .number { color: var(--constant); }
+        .operator { color: var(--text-primary); }
+        .punctuation { color: var(--text-primary); }
+
+        /* Status Indicators */
+        .status-true { color: var(--success); }
+        .status-false { color: var(--danger); }
+        .status-pending { color: var(--warning); }
+
+        /* Code Blocks */
+        .code-block {
+            margin: 1.5rem 0;
+            border-left: 3px solid var(--border);
+            padding-left: 1rem;
+        }
+
+        .code-block-title {
             color: var(--text-secondary);
-            font-size: 0.875rem;
-            font-weight: 600;
+            margin-bottom: 0.5rem;
+            font-size: 12px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        .stat-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.2rem;
-        }
-
-        .icon-blue { background: rgba(59, 130, 246, 0.15); color: var(--primary); }
-        .icon-purple { background: rgba(139, 92, 246, 0.15); color: var(--secondary); }
-        .icon-green { background: rgba(16, 185, 129, 0.15); color: var(--accent); }
-        .icon-orange { background: rgba(245, 158, 11, 0.15); color: var(--warning); }
-
-        .stat-value {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 0.25rem;
-        }
-
-        .stat-trend {
-            display: flex;
-            align-items: center;
-            gap: 0.25rem;
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-
-        .trend-up { color: var(--success); }
-        .trend-down { color: var(--danger); }
-
-        /* Main Grid */
-        .main-grid {
-            display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        @media (max-width: 1024px) {
-            .main-grid {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        /* Card Base */
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border);
-            border-radius: var(--radius);
-            padding: 1.5rem;
-            box-shadow: var(--shadow);
-        }
-
-        .card-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            padding-bottom: 0.75rem;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .card-title {
-            font-size: 1.25rem;
-            font-weight: 600;
-        }
-
-        .card-subtitle {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-        }
-
-        /* Progress Section */
-        .progress-grid {
+        /* Stats in Code Style */
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 1rem;
-            margin-top: 1rem;
+            margin: 1.5rem 0;
         }
 
-        .progress-item {
-            padding: 1rem;
-            background: var(--bg-card-hover);
+        .stat-line {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
             border-radius: var(--radius);
-            border-left: 4px solid var(--primary);
+            padding: 1rem;
+            font-family: var(--font-mono);
         }
 
-        .progress-item:nth-child(2) { border-left-color: var(--secondary); }
-        .progress-item:nth-child(3) { border-left-color: var(--accent); }
-        .progress-item:nth-child(4) { border-left-color: var(--warning); }
-
-        .progress-header {
-            display: flex;
-            justify-content: space-between;
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 12px;
             margin-bottom: 0.5rem;
         }
 
-        .progress-name {
+        .stat-value {
+            font-size: 1.5rem;
             font-weight: 600;
         }
 
-        .progress-percent {
+        .stat-value .unit {
             color: var(--text-secondary);
-            font-weight: 700;
+            font-size: 0.9rem;
         }
 
-        .progress-bar {
-            height: 6px;
-            background: var(--border);
-            border-radius: 3px;
-            overflow: hidden;
-            margin-top: 0.5rem;
-        }
-
-        .progress-fill {
-            height: 100%;
-            border-radius: 3px;
-        }
-
-        .fill-blue { background: var(--primary); }
-        .fill-purple { background: var(--secondary); }
-        .fill-green { background: var(--accent); }
-        .fill-orange { background: var(--warning); }
-
-        /* Habits List */
-        .habits-list {
-            display: flex;
-            flex-direction: column;
-            gap: 0.75rem;
-        }
-
-        .habit-item {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            padding: 1rem;
-            background: var(--bg-card-hover);
-            border-radius: var(--radius);
-            border: 1px solid transparent;
-            transition: border-color 0.2s;
-        }
-
-        .habit-item:hover {
-            border-color: var(--primary);
-        }
-
-        .habit-info {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
-        }
-
+        /* Habit Checkboxes in Code Style */
         .habit-checkbox {
-            width: 20px;
-            height: 20px;
-            border: 2px solid var(--border);
-            border-radius: 4px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: inline-block;
+            width: 14px;
+            height: 14px;
+            border: 1px solid var(--border);
+            border-radius: 3px;
+            margin-right: 0.75rem;
+            vertical-align: middle;
+            position: relative;
         }
 
         .habit-checkbox.checked {
-            background: var(--primary);
-            border-color: var(--primary);
+            background: var(--success);
+            border-color: var(--success);
         }
 
         .habit-checkbox.checked::after {
             content: "✓";
-            color: white;
-            font-size: 0.75rem;
-            font-weight: bold;
-        }
-
-        .habit-name {
-            font-weight: 500;
-        }
-
-        .habit-category {
-            font-size: 0.75rem;
-            color: var(--text-secondary);
-            background: var(--border);
-            padding: 0.25rem 0.5rem;
-            border-radius: 4px;
-        }
-
-        .habit-streak {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            font-weight: 600;
-        }
-
-        .streak-fire {
-            color: var(--warning);
-        }
-
-        /* Color Palette Display */
-        .color-palette {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin: 1.5rem 0;
-            padding: 1rem;
-            background: var(--bg-card-hover);
-            border-radius: var(--radius);
-        }
-
-        .color-item {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            gap: 0.25rem;
-        }
-
-        .color-box {
-            width: 40px;
-            height: 40px;
-            border-radius: 4px;
-            border: 1px solid var(--border);
-        }
-
-        .color-label {
-            font-size: 0.7rem;
-            color: var(--text-secondary);
+            position: absolute;
+            top: -1px;
+            left: 2px;
+            color: var(--bg-primary);
+            font-size: 10px;
         }
 
         /* Footer */
@@ -349,196 +270,183 @@
             padding-top: 1.5rem;
             border-top: 1px solid var(--border);
             color: var(--text-secondary);
-            font-size: 0.875rem;
+            font-size: 12px;
         }
 
-        .accent {
-            color: var(--primary);
-            font-weight: 600;
+        .footer .accent {
+            color: var(--accent);
         }
 
-        /* Buttons */
+        /* Interactive Elements */
         .btn {
+            background: var(--bg-tertiary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
             padding: 0.5rem 1rem;
             border-radius: var(--radius);
-            border: none;
-            font-weight: 600;
+            font-family: var(--font-mono);
+            font-size: 12px;
             cursor: pointer;
             transition: all 0.2s;
-            font-size: 0.875rem;
+        }
+
+        .btn:hover {
+            border-color: var(--accent);
+            color: var(--accent);
         }
 
         .btn-primary {
-            background: var(--primary);
-            color: white;
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--bg-primary);
         }
 
         .btn-primary:hover {
-            background: var(--primary-hover);
-        }
-
-        .btn-outline {
-            background: transparent;
-            border: 1px solid var(--border);
-            color: var(--text-primary);
-        }
-
-        .btn-outline:hover {
-            border-color: var(--primary);
-            color: var(--primary);
+            background: #4493f1;
+            border-color: #4493f1;
+            color: var(--bg-primary);
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <!-- Header -->
+        <!-- File Tabs Header -->
         <div class="header">
-            <div class="logo">
-                <span class="logo-icon">🎩</span>
-                <span>Nomit Life Manager</span>
-            </div>
-            <div class="date-display">Mittwoch, 16. April 2026</div>
-        </div>
-
-        <!-- Stats Bar -->
-        <div class="stats-bar">
-            <div class="stat-card">
-                <div class="stat-header">
-                    <div class="stat-title">Habits Today</div>
-                    <div class="stat-icon icon-blue">🔄</div>
+            <div class="file-tabs">
+                <div class="file-tab active">
+                    <span class="icon">📁</span>
+                    dashboard.js
                 </div>
-                <div class="stat-value">3/4</div>
-                <div class="stat-trend trend-up">
-                    <span>↑</span>
-                    <span>75% Completion</span>
+                <div class="file-tab">
+                    <span class="icon">📁</span>
+                    habits.js
                 </div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-header">
-                    <div class="stat-title">Weekly Progress</div>
-                    <div class="stat-icon icon-purple">📈</div>
+                <div class="file-tab">
+                    <span class="icon">📁</span>
+                    budget.js
                 </div>
-                <div class="stat-value">62%</div>
-                <div class="stat-trend trend-up">
-                    <span>↑</span>
-                    <span>+8% from last week</span>
-                </div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-header">
-                    <div class="stat-title">Budget Today</div>
-                    <div class="stat-icon icon-green">💰</div>
-                </div>
-                <div class="stat-value">€24/€40</div>
-                <div class="stat-trend trend-down">
-                    <span>↓</span>
-                    <span>€16 remaining</span>
-                </div>
-            </div>
-
-            <div class="stat-card">
-                <div class="stat-header">
-                    <div class="stat-title">Australia Countdown</div>
-                    <div class="stat-icon icon-orange">🌴</div>
-                </div>
-                <div class="stat-value">261</div>
-                <div class="stat-trend">
-                    <span>Days</span>
+                <div class="file-tab">
+                    <span class="icon">📁</span>
+                    australia.js
                 </div>
             </div>
         </div>
 
-        <!-- Main Content -->
-        <div class="main-grid">
-            <!-- Left Column -->
-            <div>
-                <!-- Progress Card -->
-                <div class="card">
-                    <div class="card-header">
-                        <div>
-                            <div class="card-title">Life Areas Progress</div>
-                            <div class="card-subtitle">Weekly overview across 4 key areas</div>
-                        </div>
-                        <button class="btn btn-outline">View Details</button>
-                    </div>
-                    
-                    <div class="progress-grid">
-                        <div class="progress-item">
-                            <div class="progress-header">
-                                <div class="progress-name">Job & Karriere</div>
-                                <div class="progress-percent">80%</div>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill fill-blue" style="width: 80%"></div>
-                            </div>
-                        </div>
+        <!-- Main Dashboard Code -->
+        <div class="code-container">
+            <div class="code-header">
+                <div class="code-title">
+                    <span class="icon">📊</span>
+                    <span>nomit-dashboard.js — Life Management System</span>
+                </div>
+                <div>Last updated: 2026-04-16 21:30</div>
+            </div>
 
-                        <div class="progress-item">
-                            <div class="progress-header">
-                                <div class="progress-name">Gesundheit & Fitness</div>
-                                <div class="progress-percent">65%</div>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill fill-purple" style="width: 65%"></div>
-                            </div>
-                        </div>
-
-                        <div class="progress-item">
-                            <div class="progress-header">
-                                <div class="progress-name">Finanzen</div>
-                                <div class="progress-percent">45%</div>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill fill-green" style="width: 45%"></div>
-                            </div>
-                        </div>
-
-                        <div class="progress-item">
-                            <div class="progress-header">
-                                <div class="progress-name">Persönliche Entwicklung</div>
-                                <div class="progress-percent">90%</div>
-                            </div>
-                            <div class="progress-bar">
-                                <div class="progress-fill fill-orange" style="width: 90%"></div>
-                            </div>
-                        </div>
-                    </div>
+            <div class="code-body">
+                <div class="line-numbers">
+                    <span class="line-number">1</span>
+                    <span class="line-number">2</span>
+                    <span class="line-number">3</span>
+                    <span class="line-number">4</span>
+                    <span class="line-number">5</span>
+                    <span class="line-number">6</span>
+                    <span class="line-number">7</span>
+                    <span class="line-number">8</span>
+                    <span class="line-number">9</span>
+                    <span class="line-number">10</span>
+                    <span class="line-number">11</span>
+                    <span class="line-number">12</span>
+                    <span class="line-number">13</span>
+                    <span class="line-number">14</span>
+                    <span class="line-number">15</span>
+                    <span class="line-number">16</span>
+                    <span class="line-number">17</span>
+                    <span class="line-number">18</span>
+                    <span class="line-number">19</span>
+                    <span class="line-number">20</span>
+                    <span class="line-number">21</span>
+                    <span class="line-number">22</span>
+                    <span class="line-number">23</span>
+                    <span class="line-number">24</span>
+                    <span class="line-number">25</span>
                 </div>
 
-                <!-- Habits Card -->
-                <div class="card" style="margin-top: 1.5rem;">
-                    <div class="card-header">
-                        <div>
-                            <div class="card-title">Today's Habits</div>
-                            <div class="card-subtitle">Click to mark as completed</div>
+                <div class="code-content">
+                    <!-- Today's Focus -->
+                    <div class="code-block">
+                        <div class="code-block-title">// TODAY'S FOCUS</div>
+                        <div class="line">
+                            <span class="keyword">const</span> <span class="variable">todaysFocus</span> <span class="operator">=</span> <span class="punctuation">[</span>
                         </div>
-                        <button class="btn btn-primary">Add New</button>
+                        <div class="line indent-1">
+                            <span class="punctuation">{</span>
+                            <span class="variable">task</span><span class="operator">:</span> <span class="string">"Complete dashboard design"</span><span class="punctuation">,</span>
+                            <span class="variable">status</span><span class="operator">:</span> <span class="constant status-true">true</span><span class="punctuation">,</span>
+                            <span class="variable">priority</span><span class="operator">:</span> <span class="string">"P1"</span>
+                            <span class="punctuation">}</span><span class="punctuation">,</span>
+                        </div>
+                        <div class="line indent-1">
+                            <span class="punctuation">{</span>
+                            <span class="variable">task</span><span class="operator">:</span> <span class="string">"Implement habit tracking"</span><span class="punctuation">,</span>
+                            <span class="variable">status</span><span class="operator">:</span> <span class="constant status-pending">"pending"</span><span class="punctuation">,</span>
+                            <span class="variable">priority</span><span class="operator">:</span> <span class="string">"P1"</span>
+                            <span class="punctuation">}</span><span class="punctuation">,</span>
+                        </div>
+                        <div class="line indent-1">
+                            <span class="punctuation">{</span>
+                            <span class="variable">task</span><span class="operator">:</span> <span class="string">"Budget review"</span><span class="punctuation">,</span>
+                            <span class="variable">status</span><span class="operator">:</span> <span class="constant status-false">false</span><span class="punctuation">,</span>
+                            <span class="variable">priority</span><span class="operator">:</span> <span class="string">"P2"</span>
+                            <span class="punctuation">}</span>
+                        </div>
+                        <div class="line"><span class="punctuation">]</span><span class="punctuation">;</span></div>
                     </div>
-                    
-                    <div class="habits-list">
-                        <div class="habit-item">
-                            <div class="habit-info">
-                                <div class="habit-checkbox checked"></div>
-                                <div>
-                                    <div class="habit-name">Supplements morgens nehmen</div>
-                                    <div class="habit-category">Gesundheit</div>
-                                </div>
-                            </div>
-                            <div class="habit-streak">
-                                <span class="streak-fire">🔥</span>
-                                <span>7 day streak</span>
-                            </div>
-                        </div>
 
-                        <div class="habit-item">
-                            <div class="habit-info">
-                                <div class="habit-checkbox"></div>
-                                <div>
-                                    <div class="habit-name">Supplements abends nehmen</div>
-                                    <div class="habit-category">Gesundheit</div>
-                                </div>
-                            </div>
-                            <div class="habit-streak">
-                                <span class="streak-fire">
+                    <!-- Habit Tracker Function -->
+                    <div class="code-block">
+                        <div class="code-block-title">// HABIT TRACKER</div>
+                        <div class="line">
+                            <span class="keyword">function</span> <span class="function">checkHabits</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">{</span>
+                        </div>
+                        <div class="line indent-1">
+                            <span class="keyword">const</span> <span class="variable">habits</span> <span class="operator">=</span> <span class="punctuation">{</span>
+                        </div>
+                        <div class="line indent-2">
+                            <span class="variable">morningSupplements</span><span class="operator">:</span>
+                            <span class="habit-checkbox checked"></span><span class="string">"Supplements morgens nehmen"</span><span class="punctuation">,</span>
+                            <span class="comment">// 🔥 7 day streak</span>
+                        </div>
+                        <div class="line indent-2">
+                            <span class="variable">eveningSupplements</span><span class="operator">:</span>
+                            <span class="habit-checkbox"></span><span class="string">"Supplements abends nehmen"</span><span class="punctuation">,</span>
+                            <span class="comment">// ⏳ 3 day streak</span>
+                        </div>
+                        <div class="line indent-2">
+                            <span class="variable">englishStudy</span><span class="operator">:</span>
+                            <span class="habit-checkbox checked"></span><span class="string">"30min Englisch lernen"</span><span class="punctuation">,</span>
+                            <span class="comment">// 🔥 14 day streak</span>
+                        </div>
+                        <div class="line indent-2">
+                            <span class="variable">budgetTracking</span><span class="operator">:</span>
+                            <span class="habit-checkbox"></span><span class="string">"Budget tracken"</span><span class="punctuation">,</span>
+                            <span class="comment">// ❌ 0 day streak</span>
+                        </div>
+                        <div class="line indent-1"><span class="punctuation">}</span><span class="punctuation">;</span></div>
+                        <div class="line indent-1">
+                            <span class="keyword">return</span> <span class="variable">habits</span><span class="punctuation">;</span>
+                        </div>
+                        <div class="line"><span class="punctuation">}</span></div>
+                    </div>
+
+                    <!-- Stats Section -->
+                    <div class="stats-grid">
+                        <div class="stat-line">
+                            <div class="stat-label">// HABITS TODAY</div>
+                            <div class="stat-value"><span class="constant">3</span><span class="operator">/</span><span class="constant">4</span> <span class="unit">completed</span></div>
+                        </div>
+                        <div class="stat-line">
+                            <div class="stat-label">// WEEKLY PROGRESS</div>
+                            <div class="stat-value"><span class="constant">62</span><span class="unit">%</span></div>
+                        </div>
+                        <div class="stat-line">
+                            <div class="stat-label
