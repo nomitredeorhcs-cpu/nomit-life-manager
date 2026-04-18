@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nomit - Code Syntax Dark Mode</title>
+    <title>Nomit - Code Syntax Dark Mode (Mobile)</title>
     <style>
         /* Code Editor Dark Theme */
         :root {
@@ -56,7 +56,7 @@
             font-size: 14px;
             line-height: 1.6;
             min-height: 100vh;
-            padding: 2rem;
+            padding: 1rem;
         }
 
         .container {
@@ -68,18 +68,21 @@
         .header {
             display: flex;
             align-items: center;
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             border-bottom: 1px solid var(--border);
-            padding-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
         .file-tabs {
             display: flex;
             gap: 0.25rem;
+            min-width: min-content;
         }
 
         .file-tab {
-            padding: 0.5rem 1rem;
+            padding: 0.5rem 0.75rem;
             background: var(--bg-secondary);
             border: 1px solid var(--border);
             border-bottom: none;
@@ -88,6 +91,8 @@
             cursor: pointer;
             font-family: var(--font-mono);
             font-size: 12px;
+            white-space: nowrap;
+            flex-shrink: 0;
         }
 
         .file-tab.active {
@@ -99,7 +104,7 @@
         }
 
         .file-tab .icon {
-            margin-right: 0.5rem;
+            margin-right: 0.25rem;
             font-size: 12px;
         }
 
@@ -109,7 +114,7 @@
             border: 1px solid var(--border);
             border-radius: var(--radius);
             box-shadow: var(--shadow);
-            margin-bottom: 2rem;
+            margin-bottom: 1.5rem;
             overflow: hidden;
         }
 
@@ -118,10 +123,18 @@
             padding: 0.75rem 1rem;
             border-bottom: 1px solid var(--border);
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            flex-direction: column;
+            gap: 0.5rem;
             font-size: 12px;
             color: var(--text-secondary);
+        }
+
+        @media (min-width: 768px) {
+            .code-header {
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+            }
         }
 
         .code-title {
@@ -135,20 +148,36 @@
         }
 
         .code-body {
-            padding: 1.5rem;
+            padding: 1rem;
             position: relative;
         }
 
-        /* Line Numbers */
+        @media (min-width: 768px) {
+            .code-body {
+                padding: 1.5rem;
+            }
+        }
+
+        /* Line Numbers - Hide on mobile */
         .line-numbers {
             position: absolute;
             left: 0;
-            top: 1.5rem;
-            padding: 0 1rem;
+            top: 1rem;
+            padding: 0 0.75rem;
             color: var(--line-number);
             text-align: right;
             user-select: none;
-            font-size: 13px;
+            font-size: 12px;
+            display: none;
+        }
+
+        @media (min-width: 768px) {
+            .line-numbers {
+                display: block;
+                top: 1.5rem;
+                padding: 0 1rem;
+                font-size: 13px;
+            }
         }
 
         .line-number {
@@ -157,9 +186,15 @@
         }
 
         .code-content {
-            margin-left: 3rem;
             font-family: var(--font-mono);
             font-size: 13px;
+        }
+
+        @media (min-width: 768px) {
+            .code-content {
+                margin-left: 3rem;
+                font-size: 13px;
+            }
         }
 
         /* Syntax Highlighting */
@@ -167,12 +202,26 @@
             display: flex;
             align-items: flex-start;
             min-height: 1.6em;
-            padding-left: 1rem;
+            padding-left: 0.5rem;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
         }
 
-        .indent-1 { padding-left: 2rem; }
-        .indent-2 { padding-left: 4rem; }
-        .indent-3 { padding-left: 6rem; }
+        @media (min-width: 768px) {
+            .line {
+                padding-left: 1rem;
+            }
+        }
+
+        .indent-1 { padding-left: 1.5rem; }
+        .indent-2 { padding-left: 3rem; }
+        .indent-3 { padding-left: 4.5rem; }
+
+        @media (min-width: 768px) {
+            .indent-1 { padding-left: 2rem; }
+            .indent-2 { padding-left: 4rem; }
+            .indent-3 { padding-left: 6rem; }
+        }
 
         .keyword { color: var(--keyword); }
         .string { color: var(--string); }
@@ -192,61 +241,117 @@
 
         /* Code Blocks */
         .code-block {
-            margin: 1.5rem 0;
+            margin: 1rem 0;
             border-left: 3px solid var(--border);
-            padding-left: 1rem;
+            padding-left: 0.75rem;
+        }
+
+        @media (min-width: 768px) {
+            .code-block {
+                margin: 1.5rem 0;
+                padding-left: 1rem;
+            }
         }
 
         .code-block-title {
             color: var(--text-secondary);
             margin-bottom: 0.5rem;
-            font-size: 12px;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
 
-        /* Stats in Code Style */
+        @media (min-width: 768px) {
+            .code-block-title {
+                font-size: 12px;
+            }
+        }
+
+        /* Stats in Code Style - Mobile Grid */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1rem;
-            margin: 1.5rem 0;
+            grid-template-columns: 1fr;
+            gap: 0.75rem;
+            margin: 1rem 0;
+        }
+
+        @media (min-width: 480px) {
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 768px) {
+            .stats-grid {
+                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                gap: 1rem;
+                margin: 1.5rem 0;
+            }
         }
 
         .stat-line {
             background: var(--bg-secondary);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 1rem;
+            padding: 0.75rem;
             font-family: var(--font-mono);
+        }
+
+        @media (min-width: 768px) {
+            .stat-line {
+                padding: 1rem;
+            }
         }
 
         .stat-label {
             color: var(--text-secondary);
-            font-size: 12px;
-            margin-bottom: 0.5rem;
+            font-size: 11px;
+            margin-bottom: 0.25rem;
+        }
+
+        @media (min-width: 768px) {
+            .stat-label {
+                font-size: 12px;
+                margin-bottom: 0.5rem;
+            }
         }
 
         .stat-value {
-            font-size: 1.5rem;
+            font-size: 1.25rem;
             font-weight: 600;
+        }
+
+        @media (min-width: 768px) {
+            .stat-value {
+                font-size: 1.5rem;
+            }
         }
 
         .stat-value .unit {
             color: var(--text-secondary);
-            font-size: 0.9rem;
+            font-size: 0.8rem;
         }
 
-        /* Habit Checkboxes in Code Style */
+        /* Habit Checkboxes in Code Style - Mobile friendly */
         .habit-checkbox {
             display: inline-block;
-            width: 14px;
-            height: 14px;
+            width: 16px;
+            height: 16px;
             border: 1px solid var(--border);
-            border-radius: 3px;
-            margin-right: 0.75rem;
+            border-radius: 4px;
+            margin-right: 0.5rem;
             vertical-align: middle;
             position: relative;
+            flex-shrink: 0;
+            cursor: pointer;
+        }
+
+        @media (min-width: 768px) {
+            .habit-checkbox {
+                width: 14px;
+                height: 14px;
+                margin-right: 0.75rem;
+            }
         }
 
         .habit-checkbox.checked {
@@ -258,36 +363,93 @@
             content: "✓";
             position: absolute;
             top: -1px;
-            left: 2px;
+            left: 3px;
             color: var(--bg-primary);
-            font-size: 10px;
+            font-size: 11px;
+        }
+
+        @media (min-width: 768px) {
+            .habit-checkbox.checked::after {
+                left: 2px;
+                font-size: 10px;
+            }
+        }
+
+        /* Mobile Navigation */
+        .mobile-nav {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1rem;
+            padding-bottom: 0.75rem;
+            border-bottom: 1px solid var(--border);
+        }
+
+        @media (min-width: 768px) {
+            .mobile-nav {
+                display: none;
+            }
+        }
+
+        .mobile-nav-btn {
+            background: var(--bg-secondary);
+            border: 1px solid var(--border);
+            color: var(--text-primary);
+            padding: 0.5rem 0.75rem;
+            border-radius: var(--radius);
+            font-family: var(--font-mono);
+            font-size: 12px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.25rem;
         }
 
         /* Footer */
         .footer {
             text-align: center;
-            margin-top: 3rem;
-            padding-top: 1.5rem;
+            margin-top: 2rem;
+            padding-top: 1rem;
             border-top: 1px solid var(--border);
             color: var(--text-secondary);
-            font-size: 12px;
+            font-size: 11px;
+        }
+
+        @media (min-width: 768px) {
+            .footer {
+                margin-top: 3rem;
+                padding-top: 1.5rem;
+                font-size: 12px;
+            }
         }
 
         .footer .accent {
             color: var(--accent);
         }
 
-        /* Interactive Elements */
+        /* Interactive Elements - Touch friendly */
         .btn {
             background: var(--bg-tertiary);
             border: 1px solid var(--border);
             color: var(--text-primary);
-            padding: 0.5rem 1rem;
+            padding: 0.75rem 1rem;
             border-radius: var(--radius);
             font-family: var(--font-mono);
-            font-size: 12px;
+            font-size: 13px;
             cursor: pointer;
             transition: all 0.2s;
+            min-height: 44px; /* Minimum touch target size */
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        @media (min-width: 768px) {
+            .btn {
+                padding: 0.5rem 1rem;
+                font-size: 12px;
+                min-height: auto;
+            }
         }
 
         .btn:hover {
@@ -306,10 +468,70 @@
             border-color: #4493f1;
             color: var(--bg-primary);
         }
+
+        /* Mobile specific improvements */
+        @media (max-width: 767px) {
+            body {
+                padding: 0.75rem;
+                font-size: 13px;
+            }
+            
+            .container {
+                padding: 0;
+            }
+            
+            .code-container {
+                border-radius: var(--radius);
+                margin-bottom: 1rem;
+            }
+            
+            /* Improve touch targets */
+            .file-tab {
+                padding: 0.75rem 1rem;
+                min-height: 44px;
+            }
+            
+            /* Better scrolling for code lines */
+            .line {
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none; /* Firefox */
+            }
+            
+            .line::-webkit-scrollbar {
+                display: none; /* Chrome, Safari */
+            }
+        }
+
+        /* Tablet improvements */
+        @media (min-width: 768px) and (max-width: 1023px) {
+            body {
+                padding: 1.5rem;
+            }
+            
+            .container {
+                max-width: 100%;
+            }
+        }
     </style>
 </head>
 <body>
     <div class="container">
+        <!-- Mobile Navigation (only on mobile) -->
+        <div class="mobile-nav">
+            <button class="mobile-nav-btn">
+                <span>☰</span>
+                <span>Menu</span>
+            </button>
+            <button class="mobile-nav-btn">
+                <span>⚡</span>
+                <span>Today</span>
+            </button>
+            <button class="mobile-nav-btn">
+                <span>📊</span>
+                <span>Stats</span>
+            </button>
+        </div>
+
         <!-- File Tabs Header -->
         <div class="header">
             <div class="file-tabs">
@@ -329,6 +551,10 @@
                     <span class="icon">📁</span>
                     australia.js
                 </div>
+                <div class="file-tab">
+                    <span class="icon">📁</span>
+                    calendar.js
+                </div>
             </div>
         </div>
 
@@ -339,7 +565,7 @@
                     <span class="icon">📊</span>
                     <span>nomit-dashboard.js — Life Management System</span>
                 </div>
-                <div>Last updated: 2026-04-16 21:30</div>
+                <div>Last updated: 2026-04-18</div>
             </div>
 
             <div class="code-body">
@@ -354,21 +580,6 @@
                     <span class="line-number">8</span>
                     <span class="line-number">9</span>
                     <span class="line-number">10</span>
-                    <span class="line-number">11</span>
-                    <span class="line-number">12</span>
-                    <span class="line-number">13</span>
-                    <span class="line-number">14</span>
-                    <span class="line-number">15</span>
-                    <span class="line-number">16</span>
-                    <span class="line-number">17</span>
-                    <span class="line-number">18</span>
-                    <span class="line-number">19</span>
-                    <span class="line-number">20</span>
-                    <span class="line-number">21</span>
-                    <span class="line-number">22</span>
-                    <span class="line-number">23</span>
-                    <span class="line-number">24</span>
-                    <span class="line-number">25</span>
                 </div>
 
                 <div class="code-content">
@@ -376,77 +587,4 @@
                     <div class="code-block">
                         <div class="code-block-title">// TODAY'S FOCUS</div>
                         <div class="line">
-                            <span class="keyword">const</span> <span class="variable">todaysFocus</span> <span class="operator">=</span> <span class="punctuation">[</span>
-                        </div>
-                        <div class="line indent-1">
-                            <span class="punctuation">{</span>
-                            <span class="variable">task</span><span class="operator">:</span> <span class="string">"Complete dashboard design"</span><span class="punctuation">,</span>
-                            <span class="variable">status</span><span class="operator">:</span> <span class="constant status-true">true</span><span class="punctuation">,</span>
-                            <span class="variable">priority</span><span class="operator">:</span> <span class="string">"P1"</span>
-                            <span class="punctuation">}</span><span class="punctuation">,</span>
-                        </div>
-                        <div class="line indent-1">
-                            <span class="punctuation">{</span>
-                            <span class="variable">task</span><span class="operator">:</span> <span class="string">"Implement habit tracking"</span><span class="punctuation">,</span>
-                            <span class="variable">status</span><span class="operator">:</span> <span class="constant status-pending">"pending"</span><span class="punctuation">,</span>
-                            <span class="variable">priority</span><span class="operator">:</span> <span class="string">"P1"</span>
-                            <span class="punctuation">}</span><span class="punctuation">,</span>
-                        </div>
-                        <div class="line indent-1">
-                            <span class="punctuation">{</span>
-                            <span class="variable">task</span><span class="operator">:</span> <span class="string">"Budget review"</span><span class="punctuation">,</span>
-                            <span class="variable">status</span><span class="operator">:</span> <span class="constant status-false">false</span><span class="punctuation">,</span>
-                            <span class="variable">priority</span><span class="operator">:</span> <span class="string">"P2"</span>
-                            <span class="punctuation">}</span>
-                        </div>
-                        <div class="line"><span class="punctuation">]</span><span class="punctuation">;</span></div>
-                    </div>
-
-                    <!-- Habit Tracker Function -->
-                    <div class="code-block">
-                        <div class="code-block-title">// HABIT TRACKER</div>
-                        <div class="line">
-                            <span class="keyword">function</span> <span class="function">checkHabits</span><span class="punctuation">(</span><span class="punctuation">)</span> <span class="punctuation">{</span>
-                        </div>
-                        <div class="line indent-1">
-                            <span class="keyword">const</span> <span class="variable">habits</span> <span class="operator">=</span> <span class="punctuation">{</span>
-                        </div>
-                        <div class="line indent-2">
-                            <span class="variable">morningSupplements</span><span class="operator">:</span>
-                            <span class="habit-checkbox checked"></span><span class="string">"Supplements morgens nehmen"</span><span class="punctuation">,</span>
-                            <span class="comment">// 🔥 7 day streak</span>
-                        </div>
-                        <div class="line indent-2">
-                            <span class="variable">eveningSupplements</span><span class="operator">:</span>
-                            <span class="habit-checkbox"></span><span class="string">"Supplements abends nehmen"</span><span class="punctuation">,</span>
-                            <span class="comment">// ⏳ 3 day streak</span>
-                        </div>
-                        <div class="line indent-2">
-                            <span class="variable">englishStudy</span><span class="operator">:</span>
-                            <span class="habit-checkbox checked"></span><span class="string">"30min Englisch lernen"</span><span class="punctuation">,</span>
-                            <span class="comment">// 🔥 14 day streak</span>
-                        </div>
-                        <div class="line indent-2">
-                            <span class="variable">budgetTracking</span><span class="operator">:</span>
-                            <span class="habit-checkbox"></span><span class="string">"Budget tracken"</span><span class="punctuation">,</span>
-                            <span class="comment">// ❌ 0 day streak</span>
-                        </div>
-                        <div class="line indent-1"><span class="punctuation">}</span><span class="punctuation">;</span></div>
-                        <div class="line indent-1">
-                            <span class="keyword">return</span> <span class="variable">habits</span><span class="punctuation">;</span>
-                        </div>
-                        <div class="line"><span class="punctuation">}</span></div>
-                    </div>
-
-                    <!-- Stats Section -->
-                    <div class="stats-grid">
-                        <div class="stat-line">
-                            <div class="stat-label">// HABITS TODAY</div>
-                            <div class="stat-value"><span class="constant">3</span><span class="operator">/</span><span class="constant">4</span> <span class="unit">completed</span></div>
-                        </div>
-                        <div class="stat-line">
-                            <div class="stat-label">// WEEKLY PROGRESS</div>
-                            <div class="stat-value"><span class="constant">62</span><span class="unit">%</span></div>
-                        </div>
-                        <div class="stat-line">
-                            <div class="stat-label
+                            <span class="keyword">const</span> <span class="variable">todaysFocus</span> <span
